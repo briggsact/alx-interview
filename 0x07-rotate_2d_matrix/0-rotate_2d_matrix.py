@@ -1,17 +1,21 @@
 #!/usr/bin/python3
-"""
-Given an n x n 2D matrix, rotate it 90 degrees clockwise.
-Prototype: def rotate_2d_matrix(matrix):
-Do not return anything. The matrix must be edited in-place.
-You can assume the matrix will have 2 dimensions and will not be empty.
-"""
+''' rotates a 2D matrix '''
 
 
 def rotate_2d_matrix(matrix):
-    for i in range(len(matrix)):
-        for j in range(i):
-            a, b = matrix[i][j], matrix[j][i]
-            matrix[i][j], matrix[j][i] = b, a
-    for row in matrix:
-        row.reverse()
+    '''
+        rotates 2d matrix 90 degrees clockwise
+        rotation happens in place
+        args:
+            matrix
+    '''
+    rows = len(matrix)
+    columns = rows - 1
 
+    for i in range(0, int(rows / 2)):
+        for j in range(i, columns - i):
+            temp = matrix[i][j]
+            matrix[i][j] = matrix[columns - j][i]
+            matrix[columns - j][i] = matrix[columns - i][columns - j]
+            matrix[columns - i][columns - j] = matrix[j][columns - i]
+            matrix[j][columns - i] = temp
